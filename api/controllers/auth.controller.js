@@ -24,7 +24,7 @@ export const signup = async (req,res, next)=>{
 };
 
 // Create a function here to handle sign in
-export const signin = async (req, res,  next) =>{
+export const signin = async (req, res, next) =>{
     // Getting data(email and username from the client (request.body))
     const {email, password} = req.body;
 
@@ -40,13 +40,14 @@ export const signin = async (req, res,  next) =>{
         // verify password
         if(!validPassword) return next(errorHandler(401, 'Wrong Credentials'));
 
-        // Not Showing the password hashed
-        const  {password:pass, ...rest} = validUser._doc;
+// Authenticate the User
 
         // Creating token here
         const token =  jwt.sign({id : validUser.id}, process.env.JWT_SECRET);
+                // Not Showing the password hashed
+                const  {password:pass, ...rest} = validUser._doc;
         // cookie
-        res.cookie('access_token', token, {httpOnly : true} ).status(200).json(rest);
+        res.cookie('access_token', token, {httpOnly : true}).status(200).json(rest);
 
     } catch (error) {
         next(error);

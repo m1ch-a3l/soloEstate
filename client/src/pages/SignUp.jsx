@@ -53,7 +53,7 @@ navigate('/sign-in');
 
 } catch (error) {
   setLoading(false);
-  setError(data.message);
+  setError(error.message);
 }
 
 }
@@ -73,7 +73,7 @@ console.log(formData);
       </form>
       <div className='flex gap-2 mt-2'>
         <p>Have an account already?</p>
-        <Link to={'/sign-in'}><span className='text-blue-700 '>Sign in</span></Link>
+        <Link to={'/sign-in'}><span className='text-blue-700 '>Sign In</span></Link>
         {error && <p className='text-red-700 mt-5' >{error}</p>}
       </div>
     </div>
